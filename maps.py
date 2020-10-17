@@ -25,4 +25,4 @@ def get_route_img(directions_result):
         end_location = step["end_location"]
         lat = end_location["lat"]
         lng = end_location["lng"]
-        urls.append("https://maps.googleapis.com/maps/api/streetview?location=" + lat + "," + lng + "&" + sensitive)
+        urls.append("https://maps.googleapis.com/maps/api/streetview?location=" + lat + "," + lng + "&key=" + sensitive)
