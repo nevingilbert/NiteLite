@@ -36,3 +36,5 @@ _Tie-break:_ Does the team have a credible plan for getting their project to mar
 _PRIZE:_ Each team member will receive a Xbox Game Pass Ultimate and a LinkedinPremium Membership. As a team, the winner will also be able to designate a charity to receive a $1000 donation
 
 Project Outline
+![Outline](FlowChart.png)
+
