@@ -8,19 +8,27 @@ import os
 from PIL import Image
 import sys
 import time
+import yaml
+
 
 # Add your Computer Vision subscription key to your environment variables.
 if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
     subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
 else:
     print("WARNING - You should set the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-    subscription_key = '2fef104876434f4586fa6f2f0240e81c'
+    with open(r'credentials.yaml') as  file:
+        credentials = yaml.load(file, Loader=yaml.BaseLoader)
+
+    subscription_key = credentials['subscription_key']
 # Add your Computer Vision endpoint to your environment variables.
 if 'COMPUTER_VISION_ENDPOINT' in os.environ:
     endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
 else:
     print("Warning - You should set the COMPUTER_VISION_ENDPOINT environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-    endpoint = "https://nitelite.cognitiveservices.azure.com/"
+    with open(r'credentials.yaml') as  file:
+        credentials = yaml.load(file, Loader=yaml.BaseLoader)
+
+    endpoint = credentials['endpoint']
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
@@ -35,8 +43,6 @@ remote_image_url_objects = "https://raw.githubusercontent.com/Azure-Samples/cogn
 print("Detecting objects in remote image:")
 # Call API with URL
 detect_objects_results_remote = computervision_client.detect_objects(remote_image_url_objects)
-
-print(type(detect_objects_results_remote))
 
 # Print detected objects results with bounding boxes
 if len(detect_objects_results_remote.objects) == 0:
