@@ -1,4 +1,4 @@
-import yaml
+import yaml, requests
 import googlemaps
 from datetime import datetime
 
@@ -17,22 +17,25 @@ def get_route(origin, destination):
 
     # Request directions via walking
     now = datetime.now()
-    directions_result = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&key=" + sensitive
+    directions_result = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&key=" + credentials['MAPS_APIKEY']
     #directions_result = gmaps.directions(origin,
     #                                    destination,
     #                                    mode="walking",
     #                                    departure_time=now)
-    return directions_result
+    r = requests.get(directions_result)
+    return r.json()
 
 
 # Store image urls of route
 def get_route_img(directions_result):
     urls = []
-    print(directions_result)
-    steps = directions_result["routes"][0]["legs"][0]["steps"][0]
+    steps = directions_result["routes"][0]["legs"][0]["steps"]
 
     for step in steps:
+        print(step)
         end_location = step["end_location"]
         lat = end_location["lat"]
         lng = end_location["lng"]
-        urls.append("https://maps.googleapis.com/maps/api/streetview?location=" + lat + "," + lng + "&key=" + credentials['MAPS_APIKEY'])
+        urls.append("https://maps.googleapis.com/maps/api/streetview?size=600x300&location=" + str(lat) + "," + str(lng) + "&key=" + credentials['MAPS_APIKEY'])
+    
+    return urls

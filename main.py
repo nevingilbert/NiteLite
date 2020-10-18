@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     print("Finding route...")
     direction_result = maps.get_route(origin, dest)
-    print("Success \n Getting images along route...")
+    print("Success \nGetting images along route...")
     route_images = maps.get_route_img(direction_result)
     print("Success")
 
@@ -21,20 +21,20 @@ if __name__ == "__main__":
     project_id = credentials['custom_vision']['id']
     publish_iteration_name = credentials['custom_vision']['name']
     
-    print("Using credentials: {}", credentials['custom_vision'])
+    print("Using credentials: {}".format(credentials['custom_vision']))
 
     print("Connecting to prediction model...")
     model = azure_custom_vision.Custom_Vision(endpoint, prediction_key, project_id, publish_iteration_name)
     print("Success")
 
-    print("Predicting with threshold {}...", 0.15)
+    print("Predicting with threshold {}...".format(0.15))
     
     total_street_lamps = []
     for url in route_images:
         print("---------------------------------------------------------------") 
-        print("Finding street lamps in image at {}", url)
+        print("Finding street lamps in image at {}".format(url))
         predictions = model.get_predictions(url, 0.15)
-        print("Found {} lamps")
+        print("Found {} lamps".format(len(predictions)))
         total_street_lamps.extend(predictions)
 
     # Display the findings.    
