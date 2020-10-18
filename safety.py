@@ -42,7 +42,7 @@ def compute_data_all_routes(origin, dest):
             total_street_lamps.extend(predictions)
         lamp_count = len(total_street_lamps)
     
-        final_route_data.append({"id" : route_idx, "img_count" : len(images_urls), "lamp_count": lamp_count})
+        final_route_data.append({"id" : route_idx, "img_count" : len(images_urls), "lamp_count": lamp_count, "duration": curr_route["legs"][0]["duration"]["text"]})
     print("---------------------------------------------------------------") 
 
     score_routes_relatively(final_route_data)
