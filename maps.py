@@ -4,6 +4,13 @@ from datetime import datetime
 
 sensitive = json.load("sensitive.json")
 
+# Origin/Destination
+# Defaults to most relevant starting location, such as user location, if available.
+# If none, the resulting map may provide a blank form to allow a user to enter the origin.
+# The value can be either a place name, address, or comma-separated latitude/longitude
+# coordinates. A string should be URL-escaped, so an address such as "City Hall, New York, NY"
+# should be converted to City+Hall%2C+New+York%2C+NY.
+
 def get_route(origin, destination):
     gmaps = googlemaps.Client(key=sensitive.APIKey)
 
