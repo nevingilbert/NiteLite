@@ -11,8 +11,8 @@ def get_routes():
 
 @api.route('/processed_requests', methods=['POST'])
 def post_route():
-    origin = request.form['origin']
-    dest = request.form['destination']
+    origin = request.json['origin']
+    dest = request.json['destination']
     
     route_dict = safety.compute_data_all_routes(origin.replace(' ', '+'), dest.replace(' ', '+'))
     

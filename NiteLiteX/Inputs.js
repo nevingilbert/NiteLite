@@ -6,7 +6,8 @@ class Inputs extends Component {
         super(props);
         this.state = {
             origin: "",
-            destination: ""
+            destination: "",
+            response: null
         }
     }
     handleOrigin = (text) => {
@@ -19,7 +20,19 @@ class Inputs extends Component {
         alert('origin: ' + origin + ' destination: ' + destination)
     }
     populate = (origin, destination) => {
-        fetch('http://127.0.0.1:5000//companies', {
+        some = {"origin" : "5021 Linda Place Longmont, Colorado", "destination" : "4223 San Marco Drive Longmont, Colorado"}
+        fetch('http://127.0.0.1:5000//processed_requests', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            origin: origin,
+            destination: destination,
+            })
+        })
+        fetch('http://127.0.0.1:5000//processed_requests', {
         method: 'GET'
         //Request Type
         })
@@ -27,13 +40,24 @@ class Inputs extends Component {
         //If response is in json then in success
         .then((responseJson) => {
         //Success
-        console.log(responseJson);
+        this.state.response = responseJson[responseJson.length - 1]
+        this.state.response.forEach(element => {
+            
+        });
         })
         //If response is not in json then in error
         .catch((error) => {
         //Error
         console.error(error);
         });
+    }
+    loop = (responseJson) => {
+        //const first = responseJson[0][0]
+        //console.log('\n' + first)
+        /*responseJson.forEach(element => {
+            
+        });
+        */
     }
     render() {
         return (
@@ -64,6 +88,15 @@ class Inputs extends Component {
                     }>
                 <Text style = {styles.enterButtonText}> LET'S GO! </Text>
                 </TouchableOpacity>
+                <Text style = {styles.enterButton}>
+                    Route 1
+                </Text>
+                <Text style = {styles.enterButton}>
+                    Route 2
+                </Text>
+                <Text style = {styles.enterButton}>
+                    Route 3
+                </Text>
             </View>
         )
      }
@@ -103,5 +136,8 @@ class Inputs extends Component {
     },
     enterButtonText:{
         color: 'white'
+    },
+    routes: {
+        backgroundColor: '#9a73ef',
     }
 })
