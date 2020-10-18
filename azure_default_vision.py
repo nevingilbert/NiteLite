@@ -46,20 +46,20 @@ class Basic_Vision:
             for tag in tags_result_remote.tags:
                 print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
 
+if __name__ == "__main__":
+    
+    with open(r'credentials.yaml') as  file:
+            credentials = yaml.load(file, Loader=yaml.BaseLoader)
 
+    subscription_key = credentials['basic']['subscription_key']
+    endpoint = credentials['basic']['endpoint']
 
-with open(r'credentials.yaml') as  file:
-        credentials = yaml.load(file, Loader=yaml.BaseLoader)
+    # Get URL image with different objects
+    # remote_image_url_objects = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
+    # remote_image_url_objects = "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzFhY2M5ZTY2LTQxNjQtNDg4OS1iZWFkLWUzM2QxZTE4OTg4ZjNiYTg5ZDk1YmI4MDMwNmI3OF9nYXNsYW1wMS5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/gaslamp1.JPG"
+    remote_image_url_objects = "https://techcrunch.com/wp-content/uploads/2015/05/shutterstock_116263732.jpg"
 
-subscription_key = credentials['basic']['subscription_key']
-endpoint = credentials['basic']['endpoint']
+    default_vision = Basic_Vision(subscription_key, endpoint)
 
-# Get URL image with different objects
-# remote_image_url_objects = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/objects.jpg"
-# remote_image_url_objects = "https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzFhY2M5ZTY2LTQxNjQtNDg4OS1iZWFkLWUzM2QxZTE4OTg4ZjNiYTg5ZDk1YmI4MDMwNmI3OF9nYXNsYW1wMS5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/gaslamp1.JPG"
-remote_image_url_objects = "https://techcrunch.com/wp-content/uploads/2015/05/shutterstock_116263732.jpg"
-
-default_vision = Basic_Vision(subscription_key, endpoint)
-
-default_vision.detect_objects(remote_image_url_objects)
-default_vision.tag_image(remote_image_url_objects)
+    default_vision.detect_objects(remote_image_url_objects)
+    default_vision.tag_image(remote_image_url_objects)

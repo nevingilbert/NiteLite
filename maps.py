@@ -1,8 +1,9 @@
-import json
+import yaml
 import googlemaps
 from datetime import datetime
 
-sensitive = json.load("sensitive.json")
+with open(r'credentials.yaml') as  file:
+            credentials = yaml.load(file, Loader=yaml.BaseLoader)
 
 # Origin/Destination
 # Defaults to most relevant starting location, such as user location, if available.
@@ -12,7 +13,7 @@ sensitive = json.load("sensitive.json")
 # should be converted to City+Hall%2C+New+York%2C+NY.
 
 def get_route(origin, destination):
-    gmaps = googlemaps.Client(key=sensitive.APIKey)
+    gmaps = googlemaps.Client(key=credentials['MAPS_APIKEY'])
 
     # Request directions via walking
     now = datetime.now()
@@ -26,10 +27,11 @@ def get_route(origin, destination):
 # Store image urls of route
 def get_route_img(directions_result):
     urls = []
+    print(directions_result)
     steps = directions_result["routes"][0]["legs"][0]["steps"][0]
 
     for step in steps:
         end_location = step["end_location"]
         lat = end_location["lat"]
         lng = end_location["lng"]
-        urls.append("https://maps.googleapis.com/maps/api/streetview?location=" + lat + "," + lng + "&key=" + sensitive)
+        urls.append("https://maps.googleapis.com/maps/api/streetview?location=" + lat + "," + lng + "&key=" + credentials['MAPS_APIKEY'])
