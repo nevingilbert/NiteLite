@@ -1,20 +1,16 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text
-} from 'react-native';
+import { StyleSheet, ScrollView, Text } from 'react-native';
 import Inputs from './Inputs.js'
 
 
 const App = () => {
   return (
-		<View style={styles.main}>
+		<ScrollView style={styles.main}>
 			<Text style={styles.title}>
 				NiteLite
 			</Text>
-    		<Inputs />
-		</View>
+    		<Inputs/>
+		</ScrollView>
 	);
 };
 

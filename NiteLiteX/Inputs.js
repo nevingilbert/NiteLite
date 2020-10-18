@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 
 class Inputs extends Component {
-    state = {
-        origin: "",
-        destination: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            origin: "",
+            destination: ""
+        }
     }
     handleOrigin = (text) => {
         this.setState({ origin: text })
@@ -14,6 +17,23 @@ class Inputs extends Component {
     }
     route = (origin, destination) => {
         alert('origin: ' + origin + ' destination: ' + destination)
+    }
+    populate = (origin, destination) => {
+        fetch('http://127.0.0.1:5000//companies', {
+        method: 'GET'
+        //Request Type
+        })
+        .then((response) => response.json())
+        //If response is in json then in success
+        .then((responseJson) => {
+        //Success
+        console.log(responseJson);
+        })
+        //If response is not in json then in error
+        .catch((error) => {
+        //Error
+        console.error(error);
+        });
     }
     render() {
         return (
@@ -37,9 +57,10 @@ class Inputs extends Component {
                     onChangeText = {this.handleDestination}
                     clearButtonMode="always"/>
                 <TouchableOpacity
+                    ref = {button => {this.button = button}}
                     style = {styles.enterButton}
                     onPress = {
-                        () => { this.route(this.state.origin, this.state.destination); this.origin.clear(); this.destination.clear(); }
+                        () => { this.populate(this.state.origin, this.state.destination) }
                     }>
                 <Text style = {styles.enterButtonText}> LET'S GO! </Text>
                 </TouchableOpacity>
@@ -51,8 +72,8 @@ class Inputs extends Component {
   
   const styles = StyleSheet.create({
     container: {
-        paddingTop: 20,
-        marginTop: 15,
+        paddingTop: 12,
+        marginTop: 10,
         margin: 39
     },
     input: {
