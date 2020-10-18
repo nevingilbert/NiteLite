@@ -42,7 +42,7 @@ def compute_data_all_routes(origin, dest):
             total_street_lamps.extend(predictions)
         lamp_count = len(total_street_lamps)
     
-        final_route_data.append({"id" : route_idx, "json" : curr_route, "img_urls" : images_urls, "lamp_count": lamp_count})
+        final_route_data.append({"id" : route_idx, "img_count" : len(images_urls), "lamp_count": lamp_count})
     print("---------------------------------------------------------------") 
 
     score_routes_relatively(final_route_data)
@@ -53,7 +53,7 @@ def compute_data_all_routes(origin, dest):
 
 def score_routes_relatively(route_data):
     for route_dict in route_data:
-        image_count = len(route_dict['img_urls']) 
+        image_count = route_dict['img_count'] 
         lamp_count = route_dict['lamp_count']
         lamps_per_iamge = (0.0 + lamp_count) / image_count
 
