@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StyleSheet
 } from 'react-native';
-import Inputs from './inputs.js'
+import Inputs from './Inputs.js'
 
 
 const App = () => {
