@@ -17,10 +17,11 @@ def get_route(origin, destination):
 
     # Request directions via walking
     now = datetime.now()
-    directions_result = gmaps.directions(origin,
-                                        destination,
-                                        mode="walking",
-                                        departure_time=now)
+    directions_result = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&key=" + sensitive
+    #directions_result = gmaps.directions(origin,
+    #                                    destination,
+    #                                    mode="walking",
+    #                                    departure_time=now)
     return directions_result
 
 
