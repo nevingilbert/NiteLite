@@ -38,3 +38,5 @@ _PRIZE:_ Each team member will receive a Xbox Game Pass Ultimate and a LinkedinP
 Project Outline
 ![Outline](FlowChart.png)
 
+![Outline](Initial UI.png)
+
